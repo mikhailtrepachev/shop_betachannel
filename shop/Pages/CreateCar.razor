@@ -1,0 +1,8 @@
+﻿@page "/create"
+
+<PageTitle>Create Car</PageTitle>
+
+<MudTextField @bind-Value="CarLabel" Label="Label" Variant="Variant.Outlined"></MudTextField>
+<MudTextField @bind-Value="CarModel" Label="Model" Variant="Variant.Outlined"></MudTextField>
+<br />
+<MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddNewCar" Href="/">Add</MudButton>

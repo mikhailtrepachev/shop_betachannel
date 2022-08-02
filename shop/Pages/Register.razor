@@ -1,0 +1,22 @@
+﻿@page "/register"
+
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudPaper Class="pa-4">
+            <MudForm>
+
+                <MudTextField T="string" Label="Username" Required="true" RequiredError="User name is required!" />
+
+                <MudTextField T="string" Label="Password"
+                              InputType="InputType.Password"
+                              Required="true"
+                              RequiredError="Password is required!" />
+
+                <div class="d-flex align-center justify-space-between">
+
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="false" Class="ml-auto">Register</MudButton>
+                </div>
+            </MudForm>
+        </MudPaper>
+    </MudItem>
+</MudGrid>

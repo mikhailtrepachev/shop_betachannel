@@ -1,0 +1,36 @@
+﻿@page "/"
+
+<PageTitle>CarShop</PageTitle>
+
+<h1>CarShop</h1>
+<div class="py-3">
+    <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Success" Href="/create">ADD CAR</MudButton>
+</div>
+<div style="display: inline-flex; flex-wrap: wrap; margin-bottom: 5px;">
+
+    @foreach (var item in AllCars)
+    {
+
+        <div style="padding: 5px; margin-right: 10px;">
+            <MudItem>
+                <MudCard>
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h6">@item.Label</MudText>
+                        </CardHeaderContent>
+                        <CardHeaderActions>
+                            <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
+                        </CardHeaderActions>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText>@item.Model</MudText>
+                        <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Text" Color="Color.Primary">Read More</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        </div>
+    }
+</div>
