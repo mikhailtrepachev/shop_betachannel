@@ -1,0 +1,9 @@
+﻿@page "/admin"
+
+@attribute [Authorize(Roles = "Admin")]
+
+<MudButton Variant="Variant.Filled" Color="Color.Dark" FullWidth="true" Href="/admin/create_role">Manage Roles</MudButton>
+<br />
+<MudButton Variant="Variant.Filled" Color="Color.Dark" FullWidth="true" Href="/admin/manage_users">Manage Users</MudButton>
+<br />
+<MudButton Variant="Variant.Filled" Color="Color.Dark" FullWidth="true" OnClick="@RouteToDeleteCarCms">Delete Car</MudButton>

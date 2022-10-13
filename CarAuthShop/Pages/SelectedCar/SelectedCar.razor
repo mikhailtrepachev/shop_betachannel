@@ -1,0 +1,30 @@
+﻿@page "/sc"
+@page "/sc/{id:int}"
+
+<MudContainer>
+    @foreach (var item in AllCars)
+    {
+
+        <div style="padding: 5px; margin-right: 10px;">
+            <MudItem>
+                <MudCard>
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h6">@item.Label</MudText>
+                        </CardHeaderContent>
+                        <CardHeaderActions>
+                            <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
+                        </CardHeaderActions>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText>@item.Model</MudText>
+                        <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Outlined" Color="Color.Tertiary" EndIcon="@Icons.Sharp.AttachMoney">@item.Cost</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        </div>
+    }
+</MudContainer>

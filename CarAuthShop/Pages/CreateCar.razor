@@ -1,0 +1,39 @@
+﻿@page "/create"
+
+@using CarAuthShop.Services
+
+@inject HttpClient Http
+
+@inherits OwningComponentBase<CarService>
+
+<PageTitle>Create Car</PageTitle>
+
+<AuthorizeView>
+    <Authorized>
+        <MudTextField @bind-Value="CarLabel" Label="Label" Variant="Variant.Outlined"></MudTextField>
+        <MudTextField @bind-Value="CarModel" Label="Model" Variant="Variant.Outlined"></MudTextField>
+        <MudTextField @bind-Value="CarDescription" Label="Description" Variant="Variant.Outlined"></MudTextField>
+        <br />
+        <InputFile id="fileInput112" OnChange="UploadFiles" hidden accept=".jpg, .jpeg, .png" />
+
+        <MudButton HtmlTag="label"
+                   Variant="Variant.Filled"
+                   Color="Color.Success"
+                   StartIcon="@Icons.Filled.CloudUpload"
+                   for="fileInput112">
+            Upload your images
+        </MudButton>
+        @foreach (var image in Images64)
+            {
+                //<MudImage Src="@($"data:image;base64,{image}")" Width="320" Height="480"></MudImage>
+                <img src="@($"data:image/jpeg;base64,{image}")" />
+            }
+
+        <MudTextField @bind-Value="CarCost" Label="Amount" Variant="Variant.Text" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" />
+        <br />
+        <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddNewCar">Add</MudButton>
+    </Authorized>
+    <NotAuthorized>
+        <MudText Align="Align.Center"><b>Please, log in</b></MudText>
+    </NotAuthorized>
+</AuthorizeView>

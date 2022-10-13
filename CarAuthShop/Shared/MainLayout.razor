@@ -1,0 +1,60 @@
+﻿@inherits LayoutComponentBase
+@using CarAuthShop.Shared
+
+<PageTitle>shop</PageTitle>
+
+<div class="page">
+    <div>
+        <MudThemeProvider />
+        <MudDialogProvider />
+        <MudSnackbarProvider />
+    </div>
+
+    <main>
+        <MudLayout>
+            <MudAppBar Color="Color.Primary" Fixed="false">
+                <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+                <MudSpacer />
+                <AuthorizeView>
+                    <Authorized>
+                        <LoginDisplay />
+                    </Authorized>
+                    <NotAuthorized>
+                        <MudIconButton Icon="@Icons.TwoTone.Login" Color="Color.Inherit" Href="/Identity/Account/Login" />
+                    </NotAuthorized>
+                </AuthorizeView>
+            </MudAppBar>
+            <MudDrawer @bind-Open="@open">
+                <MudDrawerHeader>
+                    <MudText Typo="Typo.h5" Color="Color.Primary" Style="margin-top:10px; margin-left:15px;">Menu</MudText>
+                </MudDrawerHeader>
+                <MudNavMenu>
+                    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Filled.Home">Home</MudNavLink>
+                    <MudNavLink Href="/create" Icon="@Icons.TwoTone.DirectionsCar" IconColor="Color.Success">Sell my car</MudNavLink>
+                    <MudNavLink Href="/offers" Icon="@Icons.TwoTone.HistoryEdu" IconColor="Color.Success">My offers</MudNavLink>
+                    <AuthorizeView Roles="Admin">
+                        <Authorized>
+                            <MudNavLink Href="/admin" Icon="@Icons.Filled.PestControl" IconColor="Color.Success">Admin Panel</MudNavLink>
+                        </Authorized>
+                    </AuthorizeView>
+                    <MudNavLink></MudNavLink>
+                </MudNavMenu>
+            </MudDrawer>
+            <MudMainContent Class="pt-16 px-16">
+                <MudContainer Class="mt-6">
+                    @Body
+                </MudContainer>
+            </MudMainContent>
+        </MudLayout>
+    </main>
+</div>
+
+
+@code {
+    public bool open { get; set; } = false;
+
+    public void ToggleDrawer()
+    {
+        open = !open;
+    }
+}

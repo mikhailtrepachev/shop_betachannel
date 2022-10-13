@@ -1,0 +1,14 @@
+﻿@page "/admin/create_role"
+
+@attribute [Authorize(Roles = "Admin")]
+
+<MudTextField @bind-Value="RoleName" Label="RoleName" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+<br />
+<MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" OnClick="AddNewRole">Add Role</MudButton>
+@foreach (var item in AllRoles)
+{
+    <MudPaper Class="pa-5 ma-2" Elevation="3">
+        <p>@item.RoleName</p>
+        <MudIconButton Icon="@Icons.Filled.DeleteForever" Color="Color.Error" OnClick="@(()=>DeleteRole(item.Id))" aria-label="delete"></MudIconButton>
+    </MudPaper>
+}

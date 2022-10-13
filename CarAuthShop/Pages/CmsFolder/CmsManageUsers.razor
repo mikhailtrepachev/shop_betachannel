@@ -1,0 +1,25 @@
+﻿@page "/admin/manage_users"
+
+@attribute [Authorize(Roles = "Admin")]
+
+<MudTextField @bind-Value="IdUser" Label="User_ID" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+<br />
+<MudSelect Margin="Margin.Dense" @bind-Value="SelectedRoleName" T="string" Label="Choose a Role" Variant="Variant.Text">
+    @foreach (var item in AllRoles)
+    {
+        <MudSelectItem Value="@(item.RoleName)" />
+    }
+</MudSelect>
+<br />
+<MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="@(()=>ChangeRoleUsers(SelectedRoleName, IdUser))">Change User Role</MudButton>
+<br />
+@foreach (var item in AllUserRole)
+{
+    <p>@item.RoleId</p>
+}
+<MudTextField @bind-Value="FindUserWithName" Label="Email" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+<MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" OnClick="@(()=>FindCurrentlyUser(FindUserWithName))">Get User Id</MudButton>
+@foreach (var item in FindedUser)
+{
+    <MudText>@item.Id</MudText>
+}

@@ -1,0 +1,17 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity
+@using CarAuthShop.Data.DatabaseObjects
+@attribute [IgnoreAntiforgeryToken]
+@inject SignInManager<UserDo> SignInManager
+@functions {
+    public async Task<IActionResult> OnPost()
+    {
+        if (SignInManager.IsSignedIn(User))
+        {
+            await SignInManager.SignOutAsync();
+        }
+
+        return Redirect("~/");
+    }
+}
+

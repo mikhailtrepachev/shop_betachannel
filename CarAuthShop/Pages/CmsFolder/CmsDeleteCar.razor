@@ -1,0 +1,6 @@
+﻿@page "/cms/delete_car"
+@attribute [Authorize(Roles = "Admin")]
+
+<MudTextField @bind-Value="@IdCar" Label="Id car" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+<br />
+<MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="@(()=>DeleteCar(IdCar))">Delete</MudButton>

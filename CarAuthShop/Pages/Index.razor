@@ -1,0 +1,42 @@
+﻿@page "/"
+
+@inject NavigationManager NavigationManager
+
+<PageTitle>CarShop</PageTitle>
+
+<h1>CarShop</h1>
+<div class="py-3">
+    <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Success" Href="/create">ADD CAR</MudButton>
+</div>
+
+<MudItem>
+    @foreach (var item in AllCars)
+    {
+            <MudCard
+                     Style="display: inline-grid; flex-wrap:wrap; margin-bottom: 5px; width:30%; height:40%; padding: 10px; margin-right: 5px;">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">@item.Label</MudText>
+                    </CardHeaderContent>
+                    <CardHeaderActions>
+                        <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
+                    </CardHeaderActions>
+                </MudCardHeader>
+                
+                <MudCardContent>
+                    <MudText>@item.Model</MudText>
+                    <MudText Typo="Typo.body2">@item.Description</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton
+                               Variant="Variant.Outlined"
+                               Color="Color.Tertiary"
+                               EndIcon="@Icons.Sharp.AttachMoney"
+                               OnClick="@(()=>RouteWithId(item.Id))"
+                               >@item.Cost</MudButton>
+                    <MudText Class="d-flex align-right justify-center mud-width-full" Color="Color.Dark" Typo="Typo.overline" Align="Align.Right">@item.CreationDate.ToString("d")</MudText>
+                </MudCardActions>
+            </MudCard>
+
+        }
+</MudItem>
