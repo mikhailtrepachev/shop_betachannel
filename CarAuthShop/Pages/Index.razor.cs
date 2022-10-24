@@ -1,4 +1,4 @@
-﻿using CarAuthShop.Data.DatabaseObjects;
+﻿using CarAuthShop.Data.Records;
 using CarAuthShop.Models.Records;
 using CarAuthShop.Services.Infrastructure;
 using Microsoft.AspNetCore.Components;
@@ -13,23 +13,27 @@ public partial class Index
 
     private IReadOnlyCollection<CarR> AllCars { get; set; } = null!;
 
-    private List<CarImagesDo> AllImages64 { get; set; } = new();
+    private IReadOnlyCollection<CarImageR> AllImages64 { get; set; } = null!;
+
+    private string CurrentImageData { get; set; } = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
         GetAllCars();
     }
 
-    public void GetAllCars()
+    private void GetAllCars()
     {
         AllCars = _carService.GetAllCars();
 
         AllImages64 = _carService.GetAllImages();
     }
 
-    public void RouteWithId(int id)
+    private void RouteWithId(int id)
     {
         Navigationmanager.NavigateTo("/sc/" + id);
     }
+
+
 }
 

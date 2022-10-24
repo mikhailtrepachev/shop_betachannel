@@ -15,11 +15,11 @@ public partial class CmsManageUsers
 
     private List<UserRoleR> AllUserRole { get; set; } = new();
 
-    public string IdUser { get; set; } = string.Empty;
+    private string IdUser { get; set; } = string.Empty;
 
-    public string SelectedRoleName { get; set; } = string.Empty;
+    private string SelectedRoleName { get; set; } = string.Empty;
 
-    public string FindUserWithName { get; set; } = string.Empty;
+    private string FindUserWithName { get; set; } = string.Empty;
 
     private List<UserR> FindedUser { get; set; } = new();
 
@@ -29,12 +29,12 @@ public partial class CmsManageUsers
         GetAllUserRole();
     }
 
-    public void GetAllRoles()
+    private void GetAllRoles()
     {
         AllRoles = _roleManagerService.GetAllRoles().ToList();
     }
 
-    public async void ChangeRoleUsers(string SelectedRoleName, string IdUser)
+    private async void ChangeRoleUsers(string SelectedRoleName, string IdUser)
     {
         await _roleManagerService.UpdateRoleUsers(SelectedRoleName, IdUser);
         SelectedRoleName = string.Empty;
@@ -44,12 +44,12 @@ public partial class CmsManageUsers
 
     }
 
-    public void FindCurrentlyUser(string findUserWithName)
+    private void FindCurrentlyUser(string currentlyUserEmail)
     {
-        FindedUser = _roleManagerService.FindCurrentlyUser(findUserWithName).ToList();
+        FindedUser = _roleManagerService.FindCurrentlyUser(currentlyUserEmail).ToList();
     }
 
-    public void GetAllUserRole()
+    private void GetAllUserRole()
     {
         AllUserRole = _roleManagerService.GetAllUserRole().ToList();
     }

@@ -7,7 +7,7 @@ namespace CarAuthShop.Pages.CmsFolder;
 
 public partial class CmsDeleteCar
 {
-    public int IdCar { get; set; }
+    private int IdCar { get; set; }
 
     [Inject] private IRoleManagerService _roleManagerService { get; set; } = null!;
 
@@ -18,7 +18,7 @@ public partial class CmsDeleteCar
 
     }
 
-    public async void DeleteCar(int idCar)
+    private async void DeleteCar(int idCar)
     {
         var state = await _roleManagerService.DeleteCar(idCar);
 

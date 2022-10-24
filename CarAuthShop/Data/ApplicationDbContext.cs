@@ -1,11 +1,8 @@
 ﻿using CarAuthShop.Data.DatabaseObjects;
 using CarAuthShop.Data.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MudBlazor;
-
 
 namespace CarAuthShop.Data;
 
@@ -27,9 +24,6 @@ public class ApplicationDbContext : IdentityDbContext<UserDo>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        
-
-        //osetreni modelu
         modelBuilder.ApplyConfiguration(new CarConfiguration());
         
         

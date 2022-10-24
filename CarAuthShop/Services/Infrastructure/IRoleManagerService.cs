@@ -1,5 +1,4 @@
-﻿using System;
-using CarAuthShop.Data.Records;
+﻿using CarAuthShop.Data.Records;
 
 
 namespace CarAuthShop.Services.Infrastructure;
@@ -16,7 +15,7 @@ public interface IRoleManagerService
 
     Task UpdateRoleUsers(string selectedRoleName, string idUser);
 
-    IReadOnlyCollection<UserR> FindCurrentlyUser(string findCurrentlyUser);
+    IReadOnlyCollection<UserR> FindCurrentlyUser(string currentlyUserEmail);
 
     Task<bool> DeleteCar(int idCar);
 }

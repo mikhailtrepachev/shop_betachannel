@@ -1,6 +1,5 @@
-﻿using CarAuthShop.Data.DatabaseObjects;
+﻿using CarAuthShop.Data.Records;
 using CarAuthShop.Models.Records;
-using Microsoft.AspNetCore.Components.Forms;
 
 namespace CarAuthShop.Services.Infrastructure;
 
@@ -14,7 +13,7 @@ public interface ICarService
 
     Task<bool> UploadImagesToDatabase(List<string> images64, int carId);
 
-    List<CarImagesDo> GetAllImages();
+    IReadOnlyCollection<CarImageR> GetAllImages();
 
 }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using CarAuthShop.Data;
+﻿using CarAuthShop.Data;
 using CarAuthShop.Data.Records;
 using CarAuthShop.Services.Infrastructure;
 using Microsoft.AspNetCore.Identity;
@@ -107,7 +106,7 @@ namespace CarAuthShop.Services
             }
         }
 
-        public IReadOnlyCollection<UserR> FindCurrentlyUser(string findCurrentlyUser)
+        public IReadOnlyCollection<UserR> FindCurrentlyUser(string currentlyUserEmail)
             => _dbContext.Users
                 .Select(user =>
                     new UserR()
@@ -116,7 +115,7 @@ namespace CarAuthShop.Services
                         Email = user.Email,
                         Name = user.UserName
                     })
-                .Where(user => user.Email == findCurrentlyUser)
+                .Where(user => user.Email == currentlyUserEmail)
                 .ToList()
                 .AsReadOnly();
 

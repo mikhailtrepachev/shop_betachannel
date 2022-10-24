@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using CarAuthShop.Data.Models;
+﻿using CarAuthShop.Data.Models;
 
 namespace CarAuthShop.Data.DatabaseObjects;
 

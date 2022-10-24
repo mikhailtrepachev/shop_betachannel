@@ -1,5 +1,6 @@
 ﻿using System;
 using CarAuthShop.Data.DatabaseObjects;
+using CarAuthShop.Data.Records;
 using CarAuthShop.Models.Records;
 using CarAuthShop.Services.Infrastructure;
 using Microsoft.AspNetCore.Components;
@@ -13,13 +14,17 @@ public partial class Offers
     [Inject] private IOfferService _offerService { get; set; } = null!;
 
     private List<CarR> AllCars { get; set; } = new();
+    
+    private IReadOnlyCollection<CarImageR> AllImages64 { get; set; } = null!;
+
+    private string CurrentImageData { get; set; } = string.Empty;
 
     [CascadingParameter]
     private Task<AuthenticationState>? AuthenticationState { get; set; }
 
     [Inject] private UserManager<UserDo> UserManager { get; set; } = null!;
 
-    public string CurrentUserId { get; set; } = string.Empty;
+    private string CurrentUserId { get; set; } = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
@@ -34,9 +39,11 @@ public partial class Offers
         GetAllCars(CurrentUserId);
     }
 
-    public void GetAllCars(string CurrentUserId)
+    public void GetAllCars(string currentUserId)
     {
-        AllCars = _offerService.GetCurrentlyCars(CurrentUserId).ToList();
+        AllCars = _offerService.GetCurrentlyCars(currentUserId).ToList();
+
+        AllImages64 = _offerService.GetCurrentlyImages(currentUserId).ToList();
     }
 
     public async void DeleteCurrentCar(int id)
@@ -46,6 +53,20 @@ public partial class Offers
         AllCars.Remove(AllCars.FirstOrDefault(car => car.Id == id)!);
 
         StateHasChanged();
+    }
+    
+    private string GetCurrentlyImage(int carId)
+    {
+        var currentImageTemp = AllImages64.FirstOrDefault(image => image.CarId == carId);
+
+        if (currentImageTemp == null)
+        {
+            return string.Empty;
+        }
+        
+        CurrentImageData = currentImageTemp.ImageData64;
+
+        return string.Empty;
     }
 }
 

@@ -1,6 +1,8 @@
-﻿using CarAuthShop.Data;
+﻿using System.Diagnostics.CodeAnalysis;
+using CarAuthShop.Data;
 using CarAuthShop.Data.DatabaseObjects;
 using CarAuthShop.Data.Models;
+using CarAuthShop.Data.Records;
 using CarAuthShop.Models.Records;
 using CarAuthShop.Services.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +38,7 @@ public class CarService : ICarService
         await _dbContext.Cars.AddAsync(newCar);
 
         await _dbContext.SaveChangesAsync();
+        
 
         var currentlyCreationDate = newCar.CreationDate;
         
@@ -54,6 +57,7 @@ public class CarService : ICarService
 
         var ee = await _dbContext.Cars
             .FirstOrDefaultAsync(bc => bc.Id == bug);
+        
         
         if (ee != default)
         {
@@ -127,18 +131,23 @@ public class CarService : ICarService
         return true;
     }
 
-    public List<CarImagesDo> GetAllImages()
+    
+    //TODO: FIX MEMORY TRAFFIC IN LOH in GetAllImages()
+    [SuppressMessage("ReSharper.DPA", "DPA0003: Excessive memory allocations in LOH", MessageId = "type: System.Char[]")]
+    public IReadOnlyCollection<CarImageR> GetAllImages()
     {
-        var images = _dbContext.CarImages
+        var task = _dbContext.CarImages
             .Select(image =>
-                new CarImagesDo()
+                new CarImageR
                 {
-                    ImageData64 = image.ImageData64,
                     Id = image.Id,
-                    CarId = image.CarId
+                    CarId = image.CarId,
+                    ImageName = image.ImageName,
+                    ImageData64 = image.ImageData64
                 })
-            .ToList();
+            .ToList()
+            .AsReadOnly();
 
-        return images;
+        return task;
     }
 }

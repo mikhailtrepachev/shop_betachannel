@@ -1,6 +1,4 @@
-﻿using System;
-using CarAuthShop.Data.Records;
-using CarAuthShop.Pages.CmsFolder;
+﻿using CarAuthShop.Data.Records;
 using CarAuthShop.Services.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
@@ -17,9 +15,9 @@ public partial class CmsUpdateRole
 
     private List<RoleR> AllRoles { get; set; } = new List<RoleR>();
 
-    public string RoleName { get; set; } = string.Empty;
+    private string RoleName { get; set; } = string.Empty;
 
-    public void AddNewRole()
+    private void AddNewRole()
     {
         _roleManagerService.AddNewRole(RoleName);
 
@@ -33,12 +31,12 @@ public partial class CmsUpdateRole
         GetAllRoles();
     }
 
-    public void GetAllRoles()
+    private void GetAllRoles()
     {
         AllRoles = _roleManagerService.GetAllRoles().ToList();
     }
 
-    public async void DeleteRole(string id)
+    private async void DeleteRole(string id)
     {
         var state = await _roleManagerService.DeleteRole(id);
 

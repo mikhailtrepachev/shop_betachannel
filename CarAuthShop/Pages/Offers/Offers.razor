@@ -25,6 +25,9 @@
                                     </CardHeaderActions>
                                 </MudCardHeader>
                                 <MudCardContent>
+                                    @GetCurrentlyImage(item.Id)
+                                    <img src="@($"data:image/jpeg;base64,{CurrentImageData}")"
+                                         alt=""/>
                                     <MudText>@item.Model</MudText>
                                     <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
                                 </MudCardContent>

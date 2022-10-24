@@ -12,31 +12,50 @@
 <MudItem>
     @foreach (var item in AllCars)
     {
-            <MudCard
-                     Style="display: inline-grid; flex-wrap:wrap; margin-bottom: 5px; width:30%; height:40%; padding: 10px; margin-right: 5px;">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h6">@item.Label</MudText>
-                    </CardHeaderContent>
-                    <CardHeaderActions>
-                        <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
-                    </CardHeaderActions>
-                </MudCardHeader>
+        <MudCard
+            Style="display: inline-grid; flex-wrap:wrap; margin-bottom: 5px; width:30%; height:40%; padding: 10px; margin-right: 5px;">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6">@item.Label</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
+                </CardHeaderActions>
+            </MudCardHeader>
                 
-                <MudCardContent>
-                    <MudText>@item.Model</MudText>
-                    <MudText Typo="Typo.body2">@item.Description</MudText>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton
-                               Variant="Variant.Outlined"
-                               Color="Color.Tertiary"
-                               EndIcon="@Icons.Sharp.AttachMoney"
-                               OnClick="@(()=>RouteWithId(item.Id))"
-                               >@item.Cost</MudButton>
-                    <MudText Class="d-flex align-right justify-center mud-width-full" Color="Color.Dark" Typo="Typo.overline" Align="Align.Right">@item.CreationDate.ToString("d")</MudText>
-                </MudCardActions>
-            </MudCard>
+            <MudCardContent>
+                @GetCurrentlyImage(item.Id)
+                <img src="@($"data:image/jpeg;base64,{CurrentImageData}")"
+                     alt=""/>
+                <MudText>@item.Model</MudText>
+                <MudText Typo="Typo.body2">@item.Description</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton
+                    Variant="Variant.Outlined"
+                    Color="Color.Tertiary"
+                    EndIcon="@Icons.Sharp.AttachMoney"
+                    OnClick="@(()=>RouteWithId(item.Id))"
+                >@item.Cost</MudButton>
+                <MudText Class="d-flex align-right justify-center mud-width-full" Color="Color.Dark" Typo="Typo.overline" Align="Align.Right">@item.CreationDate.ToString("d")</MudText>
+            </MudCardActions>
+        </MudCard>
 
-        }
+    }
 </MudItem>
+
+@code {
+    private string GetCurrentlyImage(int carId)
+    {
+        var currentImageTemp = AllImages64.FirstOrDefault(image => image.CarId == carId);
+
+        if (currentImageTemp == null)
+        {
+            return string.Empty;
+        }
+        
+        CurrentImageData = currentImageTemp.ImageData64;
+
+        return string.Empty;
+    }
+}
