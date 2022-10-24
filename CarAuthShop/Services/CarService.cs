@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using CarAuthShop.Data;
 using CarAuthShop.Data.DatabaseObjects;
-using CarAuthShop.Data.Models;
 using CarAuthShop.Data.Records;
 using CarAuthShop.Models.Records;
 using CarAuthShop.Services.Infrastructure;

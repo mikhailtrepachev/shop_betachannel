@@ -7,7 +7,7 @@ public interface IOfferService
 {
     IReadOnlyCollection<CarR> GetCurrentlyCars(string currentUserId);
 
-    Task DeleteCurrentCar(int id);
+    Task<bool> DeleteCurrentCar(int id);
 
     IReadOnlyCollection<CarImageR> GetCurrentlyImages(string currentUserId);
 }

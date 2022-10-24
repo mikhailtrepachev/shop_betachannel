@@ -2,6 +2,7 @@
 using CarAuthShop.Data.Records;
 using CarAuthShop.Models.Records;
 using CarAuthShop.Services.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace CarAuthShop.Services
@@ -47,21 +48,22 @@ namespace CarAuthShop.Services
             return carsOffer;
         }
 
-        public async Task DeleteCurrentCar(int id)
+        public async Task<bool> DeleteCurrentCar(int id)
         {
-            var taskDeleteCar = _dbContext.Cars
-                .FirstOrDefault(car => car.Id == id);
+            var taskDeleteCar = await _dbContext.Cars
+                .FirstOrDefaultAsync(car => car.Id == id);
 
-            var taskDeleteUserCar = _dbContext.CarUser
-                .FirstOrDefault(userCar => userCar.CarDoId == id);
+            var taskDeleteUserCar = await _dbContext.CarUser
+                .FirstOrDefaultAsync(userCar => userCar.CarDoId == id);
 
             if (taskDeleteCar == null || taskDeleteUserCar == null)
-                return;
+                return false;
 
             _dbContext.Cars.Remove(taskDeleteCar);
             _dbContext.CarUser.Remove(taskDeleteUserCar);
 
             await _dbContext.SaveChangesAsync();
+            return true;
         }
 
         public IReadOnlyCollection<CarImageR> GetCurrentlyImages(string currentlyUserId)

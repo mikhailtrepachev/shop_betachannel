@@ -1,7 +1,4 @@
-﻿using System;
-using CarAuthShop.Data.DatabaseObjects;
-
-namespace CarAuthShop.Data.Models;
+﻿namespace CarAuthShop.Data.DatabaseObjects;
 
 public class CarDo
 {
@@ -21,5 +18,7 @@ public class CarDo
 
     public CarUserDo? CarUserDo { get; set; } = null!;
 
-    public List<CarImagesDo> CarImagesDos { get; set; } = null!;
+    public List<OrderDo> OrderDo { get; set; } = new();
+
+    public List<CarImagesDo> CarImagesDos { get; set; } = new();
 }

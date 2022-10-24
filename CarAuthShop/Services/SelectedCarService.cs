@@ -3,8 +3,8 @@ using CarAuthShop.Data.Records;
 using CarAuthShop.Models.Records;
 using CarAuthShop.Services.Infrastructure;
 
-namespace CarAuthShop.Services
-{
+namespace CarAuthShop.Services;
+
     public class SelectedCarService : ISelectedCarService
     {
         private readonly ApplicationDbContext _dbContext;
@@ -46,5 +46,5 @@ namespace CarAuthShop.Services
                 .ToList()
                 .AsReadOnly();
     }
-}
+
 

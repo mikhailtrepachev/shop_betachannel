@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using CarAuthShop.Data.Models;
 
 namespace CarAuthShop.Data.DatabaseObjects;
 

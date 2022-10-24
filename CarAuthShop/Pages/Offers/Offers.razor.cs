@@ -6,12 +6,15 @@ using CarAuthShop.Services.Infrastructure;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
+using MudBlazor;
 
 namespace CarAuthShop.Pages.Offers;
 
 public partial class Offers
 {
     [Inject] private IOfferService _offerService { get; set; } = null!;
+    
+    [Inject] private ISnackbar _snackBar { get; set; } = null!;
 
     private List<CarR> AllCars { get; set; } = new();
     
@@ -39,18 +42,20 @@ public partial class Offers
         GetAllCars(CurrentUserId);
     }
 
-    public void GetAllCars(string currentUserId)
+    private void GetAllCars(string currentUserId)
     {
         AllCars = _offerService.GetCurrentlyCars(currentUserId).ToList();
 
         AllImages64 = _offerService.GetCurrentlyImages(currentUserId).ToList();
     }
 
-    public async void DeleteCurrentCar(int id)
+    private async void DeleteCurrentCar(int id)
     {
-        await _offerService.DeleteCurrentCar(id);
-
+        var state = await _offerService.DeleteCurrentCar(id);
+        
         AllCars.Remove(AllCars.FirstOrDefault(car => car.Id == id)!);
+        
+        StateMessenger(state);
 
         StateHasChanged();
     }
@@ -67,6 +72,22 @@ public partial class Offers
         CurrentImageData = currentImageTemp.ImageData64;
 
         return string.Empty;
+    }
+
+    private void StateMessenger(bool state)
+    {
+        if (state == false)
+        {
+            _snackBar.Configuration.SnackbarVariant = Variant.Outlined;
+            _snackBar.Configuration.MaxDisplayedSnackbars = 5;
+            _snackBar.Add("Car has not been deleted!", Severity.Error);
+        }
+        else
+        {
+            _snackBar.Configuration.SnackbarVariant = Variant.Outlined;
+            _snackBar.Configuration.MaxDisplayedSnackbars = 5;
+            _snackBar.Add("Car has been deleted!", Severity.Success);
+        }
     }
 }
 

@@ -21,6 +21,7 @@ builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<IRoleManagerService, RoleManagerService>();
 builder.Services.AddScoped<IOfferService, OfferService>();
 builder.Services.AddScoped<ISelectedCarService, SelectedCarService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 // Add services to the container.
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

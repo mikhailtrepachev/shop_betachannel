@@ -1,6 +1,8 @@
 ﻿@page "/sc"
 @page "/sc/{id:int}"
 
+@inject IDialogService DialogService
+
 <MudContainer>
     @foreach (var item in AllCars)
     {
@@ -13,7 +15,7 @@
                             <MudText Typo="Typo.h6">@item.Label</MudText>
                         </CardHeaderContent>
                         <CardHeaderActions>
-                            <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
+
                         </CardHeaderActions>
                     </MudCardHeader>
                     <MudCardContent>
@@ -24,10 +26,23 @@
                         <MudText Typo="Typo.body2">The quick, brown fox jumps over a lazy dog.</MudText>
                     </MudCardContent>
                     <MudCardActions>
-                        <MudButton Variant="Variant.Outlined" Color="Color.Tertiary" EndIcon="@Icons.Sharp.AttachMoney">@item.Cost</MudButton>
+                        <MudButton @onclick="OpenDialog" Variant="Variant.Filled" Color="Color.Success" EndIcon="@Icons.Sharp.AttachMoney">
+                            @item.Cost
+                        </MudButton>
                     </MudCardActions>
                 </MudCard>
             </MudItem>
         </div>
     }
 </MudContainer>
+
+@code {
+
+    private void OpenDialog()
+    {
+        DialogOptions closeOnEscapeKey = new DialogOptions() { CloseOnEscapeKey = true };
+
+        DialogService.Show<Dialog>("Your order", closeOnEscapeKey);
+    }
+
+}

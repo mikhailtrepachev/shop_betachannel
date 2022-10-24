@@ -1,5 +1,4 @@
 ﻿using CarAuthShop.Data.DatabaseObjects;
-using CarAuthShop.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -21,6 +20,8 @@ public class ApplicationDbContext : IdentityDbContext<UserDo>
     public DbSet<CarImagesDo> CarImages { get; set; } = null!;
 
     public DbSet<UserDo> UserDo { get; set; } = null!;
+
+    public DbSet<OrderDo> OrderDo { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

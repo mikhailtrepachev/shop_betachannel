@@ -1,6 +1,4 @@
-﻿using CarAuthShop.Data.Models;
-
-namespace CarAuthShop.Data.DatabaseObjects;
+﻿namespace CarAuthShop.Data.DatabaseObjects;
 
 public class CarImagesDo
 {
